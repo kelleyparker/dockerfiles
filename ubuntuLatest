@@ -1,0 +1,8 @@
+
+## WARNING: rename file to "dockerfile" prior to running!
+
+FROM ubuntu:latest
+
+RUN apt-get update -y
+RUN apt-get upgrade -y
+RUN apt install python3 -y
