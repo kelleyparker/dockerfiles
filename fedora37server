@@ -1,0 +1,14 @@
+### WARNING: rename file to "dockerfile" prior to using!
+
+
+
+FROM fedora:latest
+MAINTAINER kp
+RUN dnf upgrade -y
+RUN dnf install httpd vsftpd -y
+RUN dnf install python3 -y
+RUN useradd cliffgoat
+
+RUN usermod -aG wheel cliffgoat
+USER cliffgoat
+WORKDIR /home/cliffgoat
