@@ -1,0 +1,9 @@
+######################### 
+# WARNING: RENAME FILE TO "dockerfile" before using!
+#########################
+
+FROM mcr.microsoft.com/windows/server:ltsc2022
+
+RUN powershell Install-WindowsFeature -Name Web-Server -IncludeManagementTools -Restart
+RUN powershell Install-WindowsFeature -Name File-Services -IncludeManagementTools -Restart
+CMD [ "ping", "localhost", "-t" ]
