@@ -1,25 +1,18 @@
 FROM ubuntu:latest
 
-# Update and upgrade Ubuntu
-RUN apt-get update -y && apt-get upgrade -y
+# Set non-interactive mode
+ENV DEBIAN_FRONTEND=noninteractive
 
-# Install Apache, MySQL, PHP
-RUN apt-get install apache2 mysql-server php -y
+# Update and install Apache, MySQL, PHP
+RUN apt-get update && \
+    apt-get install apache2 mysql-server php -y
 
-# Install Python3
+# Install Python3 and any additional dependencies
 RUN apt-get install python3 -y
 
-# Create user 'cliffgoat' with password 'password' and add to sudo group
-RUN useradd -m -p $(openssl passwd -1 password) -s /bin/bash cliffgoat
-RUN usermod -aG sudo cliffgoat
-
-# Switch to user 'cliffgoat'
-USER cliffgoat
-WORKDIR /home/cliffgoat
-
-# Create database 'db1' and set MySQL login credentials
-RUN sudo service mysql start \
-    && echo "CREATE DATABASE db1;" | mysql -u cliffgoat -ppassword
+# Copy a script for database setup
+COPY setup_db.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/setup_db.sh
 
 # Start Apache and MySQL services when the container runs
-CMD sudo service apache2 start && sudo service mysql start && /bin/bash
+CMD service apache2 start && service mysql start && /bin/bash
