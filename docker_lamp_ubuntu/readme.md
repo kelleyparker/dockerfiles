@@ -1,0 +1,1 @@
+This Docker file creates an Ubuntu container with mysql-server, apache2, python3.  Cliffgoat/password are the credentials for the username as well as the mysql instance.  Cliffgoat is sudo in this environment.

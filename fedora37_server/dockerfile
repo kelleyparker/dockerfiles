@@ -3,7 +3,7 @@
 
 
 FROM fedora:latest
-MAINTAINER kp
+
 RUN dnf upgrade -y
 RUN dnf install httpd vsftpd -y
 RUN dnf install python3 -y
