@@ -15,4 +15,4 @@ RUN chmod +x /usr/local/bin/setup_db.sh
 COPY index.html /var/www/html/
 
 # Start Apache and MySQL services when the container runs
-CMD service apache2 start && service mysql start && /usr/local/bin/setup_db.sh && /bin/bash
+CMD service apache2 start && service mysql start && /bin/bash
